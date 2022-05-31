@@ -93,9 +93,14 @@ public class EnemyBattle : MonoBehaviour
         // 몬스터 공격 2초뒤에 UI 다시 생성
         //Invoke("OnskillUI", 2f);
         SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
+        // 전투의 승패 저장
         SaveData a = new SaveData(loadData.name, loadData.life, loadData.weapon, loadData.posX, loadData.posY, loadData.monster, loadData.atk, true);
-
         SaveSystem.Save(a, "save_001");
+
+        Invoke("transScene", 2f);
+    }
+    public void transScene()
+    {
         SceneManager.LoadScene("JumpMap1");
     }
     public void OnskillUI()
