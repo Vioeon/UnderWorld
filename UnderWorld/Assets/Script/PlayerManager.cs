@@ -50,6 +50,8 @@ public class PlayerManager : MonoBehaviour
     //public List<SkeletonAnimation> PIXEL_list = new List<SkeletonAnimation>();
     public SkeletonAnimation character;
 
+    GameEndManager gameendscript;  // 게임종료 스크립트 참조
+
     // 스폰 위치
     //public GameObject spawnPoint;
 
@@ -62,11 +64,15 @@ public class PlayerManager : MonoBehaviour
 
         this.gameObject.transform.position = new Vector2(loadData.posX, loadData.posY);
 
+        Debug.Log("life Num : " + loadData.life);
+
         if (loadData.weapon != "null")
         {
             Debug.Log(loadData.weapon);
             character.Skeleton.SetAttachment("Weapon", loadData.weapon); // 무기 설정
         }
+
+        gameendscript = GameObject.Find("GameManager").GetComponent<GameEndManager>();
     }
     private void Start()
     {
@@ -152,7 +158,7 @@ public class PlayerManager : MonoBehaviour
         {
             isgrounded = true;
         }
-        else if(other.gameObject.tag == "Monster")
+        else if(other.gameObject.tag == "Monster" && gameendscript.GameOver == false)
         {
             //exp.Play();
             SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
@@ -238,22 +244,6 @@ public class PlayerManager : MonoBehaviour
 
     private void SetCurrentAnimation(AnimState _state)
     {
-        /*switch (_state)
-        {
-            case AnimState.Idle:
-                _AsyncAnimation(AnimClip[(int)AnimState.Idle], true, 1f);
-                break;
-            case AnimState.Run:
-                _AsyncAnimation(AnimClip[(int)AnimState.Run], true, 1f);
-                break;
-            case AnimState.Jump:
-                _AsyncAnimation(AnimClip[(int)AnimState.Jump], true, 1f);
-                break;
-            case AnimState.Attack:
-                _AsyncAnimation(AnimClip[(int)AnimState.Attack], true, 1f);
-                break;
-        }*/
-
         // 짧게 작성한다면 이렇게
         _AsyncAnimation(AnimClip[(int)_state], true, 1f);
     }

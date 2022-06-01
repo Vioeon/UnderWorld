@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerBattle : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class PlayerBattle : MonoBehaviour
     // 내가 공격을 선택하면 1초뒤 바로 전투 시작
     // 내가먼저 공격하고 상대가 공격
 
-    public int myHp;  // 나의 체력
-    private float myatk;  // 공격력
+    public Image hpbar;
+    public float maxHp;
+    public float currentHp;  // 나의 체력
+
+    public float myatk;  // 공격력
     private int atkNum;  // 선택한 공격
     private bool selectAtk;  // 공격을 선택했는지 여부
 
-    private bool turn;  // 전투 턴
+    public bool battleEnd = false;  // 전투 종료 체크
 
     public SkeletonAnimation character;  // 플레이어 캐릭터
 
@@ -29,18 +33,22 @@ public class PlayerBattle : MonoBehaviour
     public Text gamePaner;  // 게임 패널
     string t; // 게임패널 텍스트
 
+    public GameObject DamageText;
+    private float damage;
+    public Transform hpPos;  // 데미지텍스트 생성위치
+
     private void Awake()
     {
         SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
 
-        loadData.weapon = "Bone_Knight_Weapon";
+        loadData.weapon = "Bone_Knight_Weapon";  // 임시 무기 설정
         //무기 장착
         Debug.Log(loadData.weapon);
         character.Skeleton.SetAttachment("Weapon", loadData.weapon);
 
-
         // 체력 설정
-        myHp = 100;
+        maxHp = 100f;
+        currentHp = maxHp;
         // 공격력 설정
         myatk = loadData.atk;
 
@@ -55,6 +63,8 @@ public class PlayerBattle : MonoBehaviour
     void Update()
     {
         //Debug.Log(atkNum);
+        // 체력바
+        hpbar.fillAmount = currentHp / maxHp;
 
         if (selectAtk == true)
         {
@@ -63,6 +73,11 @@ public class PlayerBattle : MonoBehaviour
 
             // 플레이어 공격 2초뒤에
             Attack();
+
+            // 플레이어 공격 후 몬스터가 죽으면 리턴
+            if(battleEnd == true)
+                return;
+
             // EnemyBattle 스크립트의 적 공격 실시
             enemyscript.attack();
         }
@@ -85,30 +100,87 @@ public class PlayerBattle : MonoBehaviour
                 // 스킬 1 - 기본 공격
                 // 애니메이션 & 이펙트 연출
 
+                character.AnimationState.SetAnimation(0, "Attack_1", true);
                 t = "플레이어의 '일반공격'!!!";
                 Debug.Log("플레이어의 '일반공격'!!!");
                 break;
             case 2:
                 // 스킬 2
 
+                character.AnimationState.SetAnimation(0, "Attack_1", true);
                 t = "플레이어의 '스킬 1 공격'!!!";
                 Debug.Log("플레이어의 '스킬 1 공격'!!!");
                 break;
             case 3:
                 // 스킬 3
 
+                character.AnimationState.SetAnimation(0, "Attack_1", true);
                 t = "플레이어의 '스킬 2 공격'!!!";
                 Debug.Log("플레이어의 '스킬 2 공격'!!!");
                 break;
             case 4:
                 // 스킬 4
 
+                character.AnimationState.SetAnimation(0, "Attack_1", true);
                 t = "플레이어의 '스킬 3 공격'!!!";
                 Debug.Log("플레이어의 '스킬 3 공격'!!!");
                 break;
         }
-        gamePaner.text = t;
+        gamePaner.text = t;  // 패널 텍스트 설정
+
+        enemyscript.playerAtk(atkNum);
     }
+    // 몬스터의 랜덤한 공격에 따라 플레이어의 Hp 감소
+    public void monsterAtk(int pick)
+    {
+        switch (pick)
+        {
+            case 1:  // 몬스터 강 공격
+                damage = enemyscript.Enemyatk * 1.5f;
+                currentHp -= damage;
+                break;
+            case 2:  // 몬스터 약 공격
+                damage = enemyscript.Enemyatk;
+                currentHp -= damage;
+                break;
+            case 3:  // 몬스터 약 공격
+                damage = enemyscript.Enemyatk;
+                currentHp -= damage;
+                break;
+        }
+        takeDamage(damage);  // 데미지 텍스트
+
+        if (currentHp <= 0)  // 전투 패배
+        {
+            // 전투 종료
+            battleEnd = true;
+
+            // 플레이어 Die 애니메이션
+            // 플레이어 Die 이펙트
+            Invoke("BattleEnd", 2f);
+        }
+
+        // 전투 종료가 아니면 UI생성하여 다시 전투 시작
+        if(battleEnd == false)
+            Invoke("OnskillUI", 2f);
+    }
+    public void BattleEnd()
+    {
+        // 전투의 승패 저장 및 라이프 -1 감소
+        SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
+        SaveData a = new SaveData(loadData.name, loadData.life - 1, loadData.weapon, loadData.posX, loadData.posY, loadData.monster, loadData.atk, false);
+        SaveSystem.Save(a, "save_001");
+
+        gamePaner.text = "전투에서 패배하였습니다!";  // 전투 패배 메시지 출력
+        // 패배 이펙트
+
+        Invoke("transScene", 2f);
+    }
+    public void transScene()
+    {
+        SceneManager.LoadScene("JumpMap1");
+    }
+
     public void skill_1()
     {
         atkNum = 1;
@@ -132,5 +204,17 @@ public class PlayerBattle : MonoBehaviour
         atkNum = 4;
         selectAtk = true;
         skillUI.SetActive(false);
+    }
+    public void OnskillUI()
+    {
+        skillUI.SetActive(true);
+        gamePaner.text = "공격을 선택하세요.";
+    }
+
+    public void takeDamage(float damage)
+    {
+        GameObject hpText = Instantiate(DamageText);
+        hpText.transform.position = hpPos.position;
+        hpText.GetComponent<DamageText>().damage = damage;
     }
 }

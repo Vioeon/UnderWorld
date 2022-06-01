@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 몬스터의 AI 스크립트
+
 public class MonsterManager : MonoBehaviour
 {
     Rigidbody2D rigid;
