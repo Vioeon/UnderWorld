@@ -9,6 +9,7 @@ TagManager:
   - Portal
   - Monster
   - Enemy
+  - EndPoint
   layers:
   - Default
   - TransparentFX

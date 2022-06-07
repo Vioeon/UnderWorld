@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     //private float velocity = 5f;
     private float jumpvelocity = 6f;  // 점프 속도
+    private AudioSource jumpsound;
 
     private float jumpPower = 0f; // 스페이스바 누르는 시간
     private float maxPower = 1f;  // 스페이스바 누르는 시간 최대 1초
@@ -58,8 +59,8 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
+        jumpsound = GetComponent<AudioSource>();
 
-        
         SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
 
         this.gameObject.transform.position = new Vector2(loadData.posX, loadData.posY);
@@ -105,6 +106,8 @@ public class PlayerManager : MonoBehaviour
             {
                 isjump = false;  // 점프를 했으므로 점프하려는 상태 false
 
+                // 점프 사운드
+                jumpsound.Play();
                 // 프리즈 해제하고 회전은 다시 프리즈
                 rig.constraints = RigidbodyConstraints2D.None;
                 rig.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -201,6 +204,16 @@ public class PlayerManager : MonoBehaviour
             timer += Time.deltaTime;
             Debug.Log("포탈 충돌 중 : " + timer);
 
+        }
+        else if (other.CompareTag("EndPoing"))
+        {
+            Debug.Log("마지막 지점 도착");
+            SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
+            // 캐릭터 A클리어 했으므로 캐릭터 B로 데이터 수정
+            SaveData character = new SaveData("B", loadData.life, loadData.weapon, this.transform.position.x, this.transform.position.y, other.gameObject.name, loadData.atk, loadData.win);
+            SaveSystem.Save(character, "save_001");
+
+            SceneManager.LoadScene("Title");
         }
     }
     private void OnTriggerStay2D(Collider2D other)

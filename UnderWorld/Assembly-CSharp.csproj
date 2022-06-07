@@ -89,6 +89,23 @@
     <Compile Include="Assets\Script\MapManager.cs" />
     <Compile Include="Assets\Script\MonsterManager.cs" />
     <Compile Include="Assets\Script\PlayerManager.cs" />
+    <Compile Include="Assets\Script\Title\Loading.cs" />
+    <Compile Include="Assets\Script\Title\Menu.cs" />
+    <Compile Include="Assets\Script\Title\MenuManager.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ChangeSizeColor.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\DelayActive.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\LookAtTarget.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\MultipleObjectsMake.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMove.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\ObjectMoveDestroy.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\ShieldActivate.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ForEffects\_ObjectsMakeBase.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\NewMaterialChange.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\ScaleFactorApplyToMaterial.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\VariousEffectsScene.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\VariousMouseOrbit.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\VariousRotateObject.cs" />
+    <Compile Include="Assets\SpecialSkillsEffectsPack\Scripts\VariousTranslateMove.cs" />
     <Compile Include="Assets\nGarden\2D_Pixel_Knight\Script\UI_Manager.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Spine\version.txt" />
@@ -98,6 +115,7 @@
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Red_Knight(2).atlas.txt" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Blue_Knight(1).atlas.txt" />
+    <None Include="Assets\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_Decal.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Elf_Knight(1).atlas.txt" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Gold_Knight(2).atlas.txt" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Red_Knight(3).atlas.txt" />
@@ -105,6 +123,7 @@
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Red_Knight(1).atlas.txt" />
     <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Free.txt" />
     <None Include="Assets\Spine\Shaders\Spine-Skeleton-URP.shader" />
+    <None Include="Assets\181227_Kingdom\ReadMe.txt" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Blue_Knight(3).atlas.txt" />
     <None Include="Assets\Spine\Shaders\Include\SpineCoreShaders\Spine-Outline-Common.cginc" />
     <None Include="Assets\Spine\Shaders\Include\Spine-Common-ShadowCasterPass-URP.hlsl" />
@@ -122,6 +141,7 @@
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Black_Knight(1).atlas.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\GUI PRO Kit - Fantasy RPG\Extensions\UIParticle\hidden particle.shader" />
+    <None Include="Assets\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_DistortionEffect.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Vengeance_Knight(1).atlas.txt" />
     <None Include="Assets\Spine\Shaders\Include\Spine-Sprite-Common-URP.hlsl" />
     <None Include="Assets\Spine\Shaders\Include\Spine-Skeleton-ForwardPass-URP.hlsl" />
@@ -155,6 +175,7 @@
     <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFXM_MobileParticleAdd_Alpha8.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Holy_Knight(3).atlas.txt" />
+    <None Include="Assets\SpecialSkillsEffectsPack\Shader_ForEffects\Shader_IntegratedEffect.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Holy_Knight(1).atlas.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\nGarden\2D_Pixel_Knight\Art\Atlas_Data\Vengeance_Knight(2).atlas.txt" />

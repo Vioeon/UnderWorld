@@ -61,21 +61,16 @@ public class EnemyBattle : MonoBehaviour
         hpbar.fillAmount = EnemyHp / maxHp;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // 플레이어의 공격에 닿으면 Hp 감소
-        if (other.collider.tag == "PlayerAtk")
-        {
-            Debug.Log("적이 플레이어의 공격에 맞음");
-        }
-    }
 
     public void attack()
     {
         // 랜덤하게 약공 or 강공 중 선택
         Atk = Random.Range(1, 4);
-        
-        Invoke("EnemyAttack", 2f);
+
+        if (playerscript.battleEnd == false)
+            Invoke("EnemyAttack", 2f);
+        else
+            return;
     }
     private void EnemyAttack()
     {
@@ -84,21 +79,21 @@ public class EnemyBattle : MonoBehaviour
             case 1:  // 강공
                 // 스킬 1 - 기본 공격
                 // 애니메이션 & 이펙트 연출
-
-                Monster.AnimationState.SetAnimation(0, "Attack_1", true);
+                playerscript.skill1.SetActive(false);
+                Monster.AnimationState.SetAnimation(0, "Attack_1", false);
                 t = "몬스터의 '강 공격'!!!";
                 Debug.Log("몬스터의 '강 공격'!!!");
                 break;
             case 2:  // 약공
 
-                Monster.AnimationState.SetAnimation(0, "Attack_1", true);
+                Monster.AnimationState.SetAnimation(0, "Attack_1", false);
                 // 이펙트
                 t = "몬스터의 '약 공격'!!!";
                 Debug.Log("몬스터의 '약 공격'!!!");
                 break;
             case 3:  // 약공
 
-                Monster.AnimationState.SetAnimation(0, "Attack_1", true);
+                Monster.AnimationState.SetAnimation(0, "Attack_1", false);
                 // 이펙트
                 t = "몬스터의 '약 공격'!!!";
                 Debug.Log("몬스터의 '약 공격'!!!");
@@ -131,17 +126,14 @@ public class EnemyBattle : MonoBehaviour
                 EnemyHp -= damage;
                 break;
         }
-        takeDamage(damage);  // 데미지 텍스트
+        hit();
+        //Invoke("hit", 0.2f);
+        //takeDamage(damage);  // 데미지 텍스트
 
-        if(EnemyHp <= 0)  // 플레이어 승리
-        {
-            // 전투 종료
-            playerscript.battleEnd = true;
-
-            // 몬스터 Die 애니메이션
-            // 몬스터 Die 이펙트
-            Invoke("BattleEnd", 2f);
-        }
+    }
+    public void BattleWin()
+    {
+        playerscript.character.AnimationState.SetAnimation(0, "Win_1", false);
     }
     public void BattleEnd()
     {
@@ -155,7 +147,7 @@ public class EnemyBattle : MonoBehaviour
         // 플레이어 승리 이펙트
         // 플레이어 아이템 획득
 
-        Invoke("transScene", 2f);
+        Invoke("transScene", 3f);
     }
     public void transScene()
     {
@@ -166,10 +158,30 @@ public class EnemyBattle : MonoBehaviour
         skillUI.SetActive(true);
         gamePaner.text = "공격을 선택하세요.";
     }
+    public void hit()
+    {
+        takeDamage(damage);
+    }
     public void takeDamage(float damage)
     {
         GameObject hpText = Instantiate(DamageText);
         hpText.transform.position = hpPos.position;
         hpText.GetComponent<DamageText>().damage = damage;
+
+        Monster.AnimationState.SetAnimation(0, "Hit", false);
+
+
+        if (EnemyHp <= 0)  // 플레이어 승리
+        {
+            // 전투 종료
+            playerscript.battleEnd = true;
+
+            Invoke("BattleWin", 1f);
+            // playerscript.character.AnimationState.SetAnimation(0, "Win_1", false);
+            Monster.AnimationState.SetAnimation(0, "Die_1", false);
+            // 몬스터 Die 애니메이션
+            // 몬스터 Die 이펙트
+            Invoke("BattleEnd", 2f);
+        }
     }
 }

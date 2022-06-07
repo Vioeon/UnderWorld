@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager_ : MonoBehaviour
 {
@@ -19,5 +20,9 @@ public class GameManager_ : MonoBehaviour
     void Update()
     {
         
+    }
+    public void homeButton()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
