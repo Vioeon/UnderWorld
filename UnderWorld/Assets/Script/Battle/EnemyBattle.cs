@@ -38,12 +38,23 @@ public class EnemyBattle : MonoBehaviour
     {
         // 무기 장착
         Monster.Skeleton.SetAttachment("Weapon", "Black_Knight_Weapon");
-
-        // 몬스터 체력 설정
-        maxHp = 50f;
-        EnemyHp = maxHp;
-        // 몬스터 공격력 설정
-        Enemyatk = 10f;
+        if (this.gameObject.CompareTag("Enemy"))
+        {
+            // 몬스터 체력 설정
+            maxHp = 50f;
+            EnemyHp = maxHp;
+            // 몬스터 공격력 설정
+            Enemyatk = 10f;
+        }
+        else if (this.gameObject.CompareTag("BossMonster"))
+        {
+            // 몬스터 체력 설정
+            maxHp = 100f;
+            EnemyHp = maxHp;
+            // 몬스터 공격력 설정
+            Enemyatk = 20f;
+        }
+        
 
         playerscript = GameObject.FindWithTag("Player").GetComponent<PlayerBattle>();
     }
@@ -151,7 +162,7 @@ public class EnemyBattle : MonoBehaviour
     }
     public void transScene()
     {
-        SceneManager.LoadScene("JumpMap1");
+        SceneManager.LoadScene("JumpMap2");
     }
     public void OnskillUI()
     {

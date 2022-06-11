@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour
             SaveData a = new SaveData(loadData.name, loadData.life, loadData.weapon, loadData.posX, loadData.posY, loadData.monster, loadData.atk, loadData.win);
 
             if (loadData.name == "B")  // 캐릭터 A를 클리어 후 B가 열리면 하드모드 버튼 활성화
-                GameObject.Find("HardModeButton").SetActive(true);
+                GameObject.Find("Panel").transform.Find("HardModeButton").gameObject.SetActive(true);
         }
     }
 

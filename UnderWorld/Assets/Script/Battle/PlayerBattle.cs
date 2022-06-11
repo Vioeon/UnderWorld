@@ -58,7 +58,10 @@ public class PlayerBattle : MonoBehaviour
         // 공격력 설정
         myatk = loadData.atk;
 
-        enemyscript = GameObject.FindWithTag("Enemy").GetComponent<EnemyBattle>();
+        if(SceneManager.GetActiveScene().name == "Battle1")
+            enemyscript = GameObject.FindWithTag("Enemy").GetComponent<EnemyBattle>();
+        else if(SceneManager.GetActiveScene().name == "BossBattle1")
+            enemyscript = GameObject.FindWithTag("BossMonster").GetComponent<EnemyBattle>();
     }
     void Start()
     {
@@ -183,7 +186,7 @@ public class PlayerBattle : MonoBehaviour
     }
     public void transScene()
     {
-        SceneManager.LoadScene("JumpMap1");
+        SceneManager.LoadScene("JumpMap2");
     }
 
     public void skill_1()

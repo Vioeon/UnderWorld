@@ -12,9 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/StartVillage.unity
     guid: 4c1075f364b3f844db177c6560355807
   - enabled: 1
+    path: Assets/Scenes/StartVillage2.unity
+    guid: a5d6a833c9d267844a5e63e5abee0577
+  - enabled: 1
     path: Assets/Scenes/JumpMap1.unity
     guid: 11af5e37c310cc04a826680dc9056e56
   - enabled: 1
+    path: Assets/Scenes/JumpMap2.unity
+    guid: 9a81d31f24b8a364c924d452849b2f52
+  - enabled: 1
     path: Assets/Scenes/Battle1.unity
     guid: e08d09b00bf48564d88c1923eccfe662
+  - enabled: 1
+    path: Assets/Scenes/BossBattle1.unity
+    guid: 902d084059046224482279c5c3cb80c6
   m_configObjects: {}

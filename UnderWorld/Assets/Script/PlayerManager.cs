@@ -170,13 +170,28 @@ public class PlayerManager : MonoBehaviour
             SaveSystem.Save(character, "save_001");
 
             Instantiate(exp,new Vector2(transform.position.x, transform.position.y-0.5f), transform.rotation);
-            Invoke(nameof(TransScene), 0.5f);
+            Invoke(nameof(GoBattle), 0.5f);
         }
-        
+        else if (other.gameObject.tag == "BossMonster" && gameendscript.GameOver == false)
+        {
+            //exp.Play();
+            SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
+            // 현재 위치 저장 & 충돌한 몬스터의 이름 저장
+            SaveData character = new SaveData(loadData.name, loadData.life, loadData.weapon, this.transform.position.x, this.transform.position.y, other.gameObject.name, loadData.atk, loadData.win);
+            SaveSystem.Save(character, "save_001");
+
+            Instantiate(exp, new Vector2(transform.position.x, transform.position.y - 0.5f), transform.rotation);
+            Invoke(nameof(GoBossBattle), 0.5f);
+        }
+
     }
-    void TransScene()
+    void GoBattle()
     {
         SceneManager.LoadScene("Battle1");
+    }
+    void GoBossBattle()
+    {
+        SceneManager.LoadScene("BossBattle1");
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -205,7 +220,7 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("포탈 충돌 중 : " + timer);
 
         }
-        else if (other.CompareTag("EndPoing"))
+        else if (other.CompareTag("EndPoint"))
         {
             Debug.Log("마지막 지점 도착");
             SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
@@ -224,11 +239,11 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("포탈 충돌 중 : " + timer);
             if (Input.GetKeyDown(KeyCode.W))
             {
-                SceneManager.LoadScene("JumpMap1");
+                SceneManager.LoadScene("JumpMap2");
             }
             if (timer >= 3f)
             {
-                SceneManager.LoadScene("JumpMap1");
+                SceneManager.LoadScene("JumpMap2");
             }
         }
     }

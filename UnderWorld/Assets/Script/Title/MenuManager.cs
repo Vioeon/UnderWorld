@@ -13,13 +13,25 @@ public class MenuManager : MonoBehaviour
     {
         Instance = this;
         SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
-        SaveData a = new SaveData("A", 5, "null", 0, -2, null, 15, false);
-        SaveSystem.Save(a, "save_001");
 
+        if (loadData.name != "B")
+        {
+            SaveData a = new SaveData("A", 5, "null", 0, -2, null, 15, false);
+            SaveSystem.Save(a, "save_001");
+        }
+        else if(loadData.name == "B")
+        {
+            SaveData a = new SaveData("B", 5, "null", 0, -2, null, 15, false);
+            SaveSystem.Save(a, "save_001");
+        }
+        
     }
     private void Start()
     {
         OpenMenu("title");
+        SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
+        Debug.Log("Data: " + loadData.name + ", " + loadData.life + ", " + loadData.weapon + ", " + loadData.posX
+            + ", " + loadData.posY + ", " + loadData.monster + ", " + loadData.atk + ", " + loadData.win);
     }
     public void OpenMenu(string menuName)
     {
@@ -85,13 +97,13 @@ public class MenuManager : MonoBehaviour
     {
         // 로딩화면 넣기
         Instance.OpenMenu("loading");
-        SceneManager.LoadScene("StartVillage");
+        SceneManager.LoadScene("StartVillage2");
     }
     public void NewGameButton()
     {
         // 캐릭터 A 로 데이터 수정
         SaveData loadData = SaveSystem.Load("save_001"); // 데이터 로드
-        SaveData a = new SaveData("A", loadData.life, loadData.weapon, loadData.posX, loadData.posY, loadData.monster, loadData.atk, loadData.win);
+        SaveData a = new SaveData("A", 5, "null", 0, -2, null, 15, false);  // 데이터 초기화
         SaveSystem.Save(a, "save_001");
 
         // 로딩화면 넣기
