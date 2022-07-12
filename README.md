@@ -7,11 +7,11 @@
 <img width="60%" src="https://user-images.githubusercontent.com/31684326/178380085-bd78755e-4477-44ef-b5a5-fa85401f6670.jpg">   
 
 - 지하마을
-<img width="100%" src="https://user-images.githubusercontent.com/31684326/178380133-d0cf6bf7-9ccd-4dc2-94e1-9f5eebcc6867.jpg">   
+<img width="60%" src="https://user-images.githubusercontent.com/31684326/178380133-d0cf6bf7-9ccd-4dc2-94e1-9f5eebcc6867.jpg">   
 <br>
 
 - 점프맵에서 몬스터와 충돌 시 전투씬으로 이동된다.
-<img width="100%" src="https://user-images.githubusercontent.com/31684326/178380234-2d0b1db3-6136-40e3-b1f4-7dcb4e6524c5.jpg">   
+<img width="60%" src="https://user-images.githubusercontent.com/31684326/178380234-2d0b1db3-6136-40e3-b1f4-7dcb4e6524c5.jpg">   
 <br>
 
 각 스킬에따라 다른 이펙트와 데미지가 설정되어있다.
