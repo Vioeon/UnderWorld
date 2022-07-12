@@ -7,7 +7,7 @@
 <img width="60%" src="https://user-images.githubusercontent.com/31684326/178380085-bd78755e-4477-44ef-b5a5-fa85401f6670.jpg">   
 
 - 지하마을
-<img width="100%" src="https://user-images.githubusercontent.com/31684326/178380133-d0cf6bf7-9ccd-4dc2-94e1-9f5eebcc6867.jpghttps://user-images.githubusercontent.com/31684326/178380133-d0cf6bf7-9ccd-4dc2-94e1-9f5eebcc6867.jpg">   
+<img width="100%" src="https://user-images.githubusercontent.com/31684326/178380133-d0cf6bf7-9ccd-4dc2-94e1-9f5eebcc6867.jpg">   
 <br>
 
 - 점프맵에서 몬스터와 충돌 시 전투씬으로 이동된다.
